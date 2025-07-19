@@ -5,6 +5,17 @@ function PokemonByGeneration() {
   const [pokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const generations = [
+    { id: 1, label: "Gen 1" },
+    { id: 2, label: "Gen 2" },
+    { id: 3, label: "Gen 3" },
+    { id: 4, label: "Gen 4" },
+    { id: 5, label: "Gen 5" },
+    { id: 6, label: "Gen 6" },
+    { id: 7, label: "Gen 7" },
+    { id: 8, label: "Gen 8" },
+  ];
+
   useEffect(() => {
     const fetchGenerationData = async () => {
       setLoading(true);
@@ -48,19 +59,22 @@ function PokemonByGeneration() {
 
   return (
     <div className="p-4 max-w-screen-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Pokémon por Generación</h1>
+      <h1 className="text-2xl font-bold mb-4">Pokemones por la Generación {generation}</h1>
 
-      <select
-        className="mb-6 p-2 border rounded"
-        value={generation}
-        onChange={(e) => setGeneration(e.target.value)}
-      >
-        {[...Array(9)].map((_, i) => (
-          <option key={i + 1} value={i + 1}>
-            Generación {i + 1}
-          </option>
+      <div className="flex flex-wrap gap-2 mb-6">
+        {generations.map((gen) => (
+          <button
+            key={gen.id}
+            onClick={() => setGeneration(gen.id)}
+            className={`px-4 py-2 rounded-full text-sm font-semibold cursor-pointer transition 
+              ${generation === gen.id
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-200 hover:bg-blue-200 text-gray-800'}`}
+          >
+            {gen.label}
+          </button>
         ))}
-      </select>
+      </div>
 
       {loading ? (
         <p className="text-gray-500">Cargando Pokémon...</p>
