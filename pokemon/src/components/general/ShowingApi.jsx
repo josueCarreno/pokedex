@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { PokemonCard } from "./PokemonCard";
 
 function PokemonByGeneration() {
   const [generation, setGeneration] = useState(1);
@@ -6,14 +7,15 @@ function PokemonByGeneration() {
   const [loading, setLoading] = useState(true);
 
   const generations = [
-    { id: 1, label: "Gen 1" },
-    { id: 2, label: "Gen 2" },
-    { id: 3, label: "Gen 3" },
-    { id: 4, label: "Gen 4" },
-    { id: 5, label: "Gen 5" },
-    { id: 6, label: "Gen 6" },
-    { id: 7, label: "Gen 7" },
-    { id: 8, label: "Gen 8" },
+    { id: 1, label: "Generación 1 (Kanto)" },
+    { id: 2, label: "Geneneración 2 (johto)" },
+    { id: 3, label: "Geneneración 4 (Hoenn)" },
+    { id: 4, label: "Geneneración 4 (Sinnoh)" },
+    { id: 5, label: "Geneneración 5 (Teselia" },
+    { id: 6, label: "Geneneración 6 (Kalos)" },
+    { id: 7, label: "Geneneración 7 (Alola" },
+    { id: 8, label: "Geneneración 8 (Galar)" },
+    { id: 9, label: "Geneneración 9 (Paldea )" }
   ];
 
   useEffect(() => {
@@ -34,7 +36,8 @@ function PokemonByGeneration() {
             if (data.sprites.front_default) {
               return {
                 name: data.name,
-                sprite: data.sprites.front_default
+                sprite: data.sprites.front_default,
+                shiny: data.sprites.front_shiny
               };
             } else {
               return null; // Si no hay sprite, no lo usamos
@@ -79,12 +82,14 @@ function PokemonByGeneration() {
       {loading ? (
         <p className="text-gray-500">Cargando Pokémon...</p>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-4">
-          {pokemonList.map((p) => (
-            <div key={p.name} className="text-center">
-              <img src={p.sprite} alt={p.name} className="mx-auto" />
-              <p className="capitalize">{p.name}</p>
-            </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+          {pokemonList.map((pokemon) => (
+            <PokemonCard
+              key={pokemon.name}
+              name={pokemon.name}
+              front={pokemon.sprite}
+              shiny={pokemon.shiny}
+            />
           ))}
         </div>
       )}

@@ -1,9 +1,11 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { PokemonByGeneration } from './components/ShowingApi'
+import { PokemonByGeneration } from './components/general/ShowingApi'
+import { Layout } from './components/general/Layout'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <PokemonByGeneration />
+    <Layout children={<PokemonByGeneration />}>
+    </Layout>
   </StrictMode>,
 )
