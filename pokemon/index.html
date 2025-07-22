@@ -6,6 +6,21 @@
     <link href="./src/output.css" rel="stylesheet">
     <title>Pokemon</title>
     <link rel="stylesheet" href="./src/styles/global.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        darkMode: 'class', // 👈 Activar modo oscuro manual
+        theme: {
+          extend: {
+            colors: {
+              primary: '#2563eb',
+            },
+          },
+        },
+      };
+    </script>
+    
   </head>
   <body>
     <div id="root"></div>

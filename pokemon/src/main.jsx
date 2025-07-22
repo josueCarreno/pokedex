@@ -5,7 +5,6 @@ import { Layout } from './components/general/Layout'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Layout children={<PokemonByGeneration />}>
-    </Layout>
+    <Layout children={<PokemonByGeneration />}/>
   </StrictMode>,
 )
