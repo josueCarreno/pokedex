@@ -1,5 +1,11 @@
 import { useState } from "react";
 
+/**
+ * @component PokemonCard
+ * @description Component to display a Pokémon card with its name and image.
+ * @param {React.ReactNode} children - The content to be displayed inside the container
+ */
+
 function PokemonCard({ name, front, shiny }) {
   const [isHovered, setIsHovered] = useState(false);
 

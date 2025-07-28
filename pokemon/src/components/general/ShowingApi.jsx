@@ -1,21 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { PokemonCard } from "./PokemonCard";
+
+/**
+ * @component PokemonByGeneration
+ * @description component used to display the Pokémon by generation, in addition to the buttons for each one
+ */
 
 function PokemonByGeneration() {
   const [generation, setGeneration] = useState(1);
   const [pokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const secondBtnRef = useRef(null);
+  const [hasClicked, setHasClicked] = useState(false);
+
   const generations = [
-    { id: 1, label: "Generación 1 (Kanto)" },
-    { id: 2, label: "Geneneración 2 (johto)" },
-    { id: 3, label: "Geneneración 4 (Hoenn)" },
-    { id: 4, label: "Geneneración 4 (Sinnoh)" },
-    { id: 5, label: "Geneneración 5 (Teselia" },
-    { id: 6, label: "Geneneración 6 (Kalos)" },
-    { id: 7, label: "Geneneración 7 (Alola" },
-    { id: 8, label: "Geneneración 8 (Galar)" },
-    { id: 9, label: "Geneneración 9 (Paldea )" }
+    { id: 1, label: "Gen 1 (Kanto)" },
+    { id: 2, label: "Gen 2 (johto)" },
+    { id: 3, label: "Gen 3 (Hoenn)" },
+    { id: 4, label: "Gen 4 (Sinnoh)" },
+    { id: 5, label: "Gen 5 (Teselia" },
+    { id: 6, label: "Gen 6 (Kalos)" },
+    { id: 7, label: "Gen 7 (Alola" },
+    { id: 8, label: "Gen 8 (Galar)" },
+    { id: 9, label: "Gen 9 (Paldea )" }
   ];
 
   useEffect(() => {
@@ -60,16 +68,31 @@ function PokemonByGeneration() {
     fetchGenerationData();
   }, [generation]);
 
+  useEffect(() => {
+  if (secondBtnRef.current) {
+    if (!hasClicked && generation !== generations[1]?.id) {
+      secondBtnRef.current.classList.add('animate-pulse');
+    } else {
+      secondBtnRef.current.classList.remove('animate-pulse');
+    }
+  }
+}, [generation, hasClicked]);
+
   return (
     <div className="p-4 max-w-screen-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Pokemones por la Generación {generation}</h1>
+      <h2 className="md:text-2xl font-bold mb-4">Pokemones por la Generación {generation}</h2>
 
-      <div className="flex flex-wrap gap-2 mb-6">
-        {generations.map((gen) => (
+      <div className="flex flex-wrap gap-2 mb-6 text-[12px]">
+        {generations.map((gen, index) => (
           <button
             key={gen.id}
-            onClick={() => setGeneration(gen.id)}
-            className={`px-4 py-2 rounded-full text-sm font-semibold cursor-pointer transition 
+            ref={index === 1 ? secondBtnRef : null} // Solo el segundo botón tendrá la ref
+            tabIndex={0}
+            onClick={() => {
+              setGeneration(gen.id);
+              setHasClicked(true);
+            }}
+            className={`px-4 py-2 rounded-full text-sm font-semibold cursor-pointer transition focus:outline-none focus:ring-2 focus:ring-blue-500
               ${generation === gen.id
                 ? 'bg-blue-600 text-white'
                 : 'bg-gray-200 hover:bg-blue-200 text-gray-800'}`}

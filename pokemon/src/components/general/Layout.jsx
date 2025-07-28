@@ -1,5 +1,13 @@
 import { useEffect, useState } from 'react';
 
+/**
+ * @component Layout
+ * @description Component to apply a dark theme to the application. Y dar disposición a la página
+ * @param {string} name - The name of the Pokémon
+ * @param {string} front - The URL of the front image of the Pokémon
+ * @param {string} shiny - The URL of the shiny image of the Pokémon
+ */
+
 function Layout({ children }) {
   const themes = ["light", "dark", "auto"];
 
@@ -55,13 +63,20 @@ function Layout({ children }) {
   return (
     <div className="min-h-screen bg-white dark:bg-[#0C1328] text-black dark:text-white transition-colors duration-500">
       
-      <header className="p-4 flex justify-end">
-        <button
-        onClick={cycleTheme}
-        className="bg-gray-200 dark:bg-gray-700 px-6 py-3 rounded text-lg font-semibold shadow hover:scale-105 transition-transform"
-      >
-        {themeIcons[theme]}
-      </button>
+      <header>
+        <nav className='flex justify-between p-4 max-w-screen-xl mx-auto'>
+          <h1 className="text-3xl font-bold text-center text-red-600 dark:text-red-400 transition-colors duration-300">
+            Pokedex
+          </h1>
+          <div className='flex md:mr-4 lg:mr-16 xl:mr-32'>
+            <button
+              onClick={cycleTheme}
+              className="bg-gray-200 dark:bg-gray-700 px-4 py-3 rounded-full text-[14px] font-semibold shadow hover:scale-105 transition-transform"
+            >
+              {themeIcons[theme]}
+            </button>
+          </div>
+        </nav>
       </header>
 
       <main>{children}</main>
