@@ -11,15 +11,15 @@ function PokemonCard({ name, front, shiny }) {
 
   return (
     <div
-      className="w-28 h-32 perspective"
+      className="perspective"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className={`relative w-full h-full duration-500 transform-style preserve-3d ${isHovered ? "rotate-y-180" : ""}`}>
+      <div className={`relative w-28 h-32 duration-500 transform-style preserve-3d ${isHovered ? "rotate-y-180" : ""}`}>
         {/* Cara frontal */}
         <div className="absolute w-full h-full backface-hidden flex flex-col items-center justify-center bg-white dark:bg-slate-800 rounded-xl shadow-md">
           <img src={front} alt={name} className="w-20 h-20" />
-          <p className="capitalize text-sm mt-1">{name}</p>
+          <p className="capitalize text-sm mt-1 text-center">{name}</p>
         </div>
 
         {/* Cara trasera (shiny) */}

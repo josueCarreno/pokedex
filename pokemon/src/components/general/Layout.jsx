@@ -68,7 +68,7 @@ function Layout({ children }) {
           <h1 className="text-3xl font-bold text-center text-red-600 dark:text-red-400 transition-colors duration-300">
             Pokedex
           </h1>
-          <div className='flex md:mr-4 lg:mr-16 xl:mr-32'>
+          <div className='flex '>
             <button
               onClick={cycleTheme}
               className="bg-gray-200 dark:bg-gray-700 px-4 py-3 rounded-full text-[14px] font-semibold shadow hover:scale-105 transition-transform"

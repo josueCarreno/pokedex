@@ -37,7 +37,8 @@ function PokemonByGeneration() {
       const detailedData = await Promise.all(
         species.map(async (pokemon) => {
           try {
-            const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`);
+            const cleaned = pokemon.url.replace(/pokemon-species\/?/, "pokemon/");
+            const res = await fetch(cleaned);
             const data = await res.json();
 
             // Verificamos que tenga sprite válido
@@ -82,7 +83,7 @@ function PokemonByGeneration() {
     <div className="p-4 max-w-screen-xl mx-auto">
       <h2 className="md:text-2xl font-bold mb-4">Pokemones por la Generación {generation}</h2>
 
-      <div className="flex flex-wrap gap-2 mb-6 text-[12px]">
+      <div className="flex flex-wrap justify-between gap-2 mb-6 text-[12px]">
         {generations.map((gen, index) => (
           <button
             key={gen.id}
@@ -92,7 +93,7 @@ function PokemonByGeneration() {
               setGeneration(gen.id);
               setHasClicked(true);
             }}
-            className={`px-4 py-2 rounded-full text-sm font-semibold cursor-pointer transition focus:outline-none focus:ring-2 focus:ring-blue-500
+            className={`px-4 py-2 min-w-[130px] rounded-full text-sm font-semibold cursor-pointer transition focus:outline-none focus:ring-2 focus:ring-blue-500
               ${generation === gen.id
                 ? 'bg-blue-600 text-white'
                 : 'bg-gray-200 hover:bg-blue-200 text-gray-800'}`}
@@ -105,7 +106,7 @@ function PokemonByGeneration() {
       {loading ? (
         <p className="text-gray-500">Cargando Pokémon...</p>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 place-items-center  gap-4">
           {pokemonList.map((pokemon) => (
             <PokemonCard
               key={pokemon.name}
